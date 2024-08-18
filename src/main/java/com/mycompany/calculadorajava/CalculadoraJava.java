@@ -104,6 +104,9 @@ public class CalculadoraJava {
         }
          return letra;
     }
+    public static boolean letraValida(String letra) {
+        return letra.matches("[a-f]");                     // Verifica que la letra esté entre 'a' y 'f'
+    }
     
 
     public static void calculoNotaParcial() {
@@ -134,9 +137,9 @@ public class CalculadoraJava {
                 int cantNotas = leerNumero("Ingrese la cantidad de notas a procesar");
                 float suma=0;
                 for(int i=1; i<=cantNotas;i++){
-                    String letra =leer("Ingrese la nota en letra mayuscula: ");       //Captura la letra proporcionada por el usuario
-                    if (letra.length() != 1 || !Character.isLetter(letra.charAt(0))) {   //Verifica la información proporcionada por el usuario y reinicia el contador de ser necesario
-                       System.out.println("Error. Por favor ingrese una sola letra.");
+                    String letra =leer("Ingrese la nota "+i+" en letra mayuscula: ");       //Captura la letra proporcionada por el usuario
+                    if (letra.length() != 1 || !Character.isLetter(letra.charAt(0))||letraValida(letra)==false) {   //Verifica la información proporcionada por el usuario y reinicia el contador de ser necesario
+                       System.out.println("Error. Por favor ingrese una letra valida.");
                        i=0;
                        } else {
                         char letra1 = letra.toUpperCase().charAt(0);      //Convierte la letra en mayuscula en caso de necesitarlo
@@ -147,7 +150,7 @@ public class CalculadoraJava {
                 } notaFinal =suma;
                 int notaInt=(int) Math.floor(notaFinal);                    //Convierte la nota final si esta en decimal a entera
                 String notaLetra = convertNumeroALetra(notaInt);            //Convierte el numero obtenido a letra
-                imprimir("Su nota final en la materia "+materia+" es"+notaLetra);
+                imprimir("Su nota final en la materia "+materia+" es "+notaLetra);
                 if (notaFinal>=3){
                     imprimir("Aprobaste la materia "+materia);
                 }else{
